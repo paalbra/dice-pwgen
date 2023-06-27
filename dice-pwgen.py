@@ -20,7 +20,7 @@ def parse_wordlist(text):
         logging.debug("The word list contains non-unique words!")
         sys.exit(1)
     logging.debug("Number of words:", len(words))
-    
+
     # Check that the wordlist contains the correct amount of words
     dice_count = math.log(len(words), 6)
     logging.debug("Number of dice is:", dice_count)
@@ -34,9 +34,9 @@ def parse_wordlist(text):
         print("Average word length is to small:", avg_word_length)
         sys.exit(1)
 
-    # All OK. Return the words 
+    # All OK. Return the words
     return words
-    
+
 if __name__ == "__main__":
     response = requests.get(wordlist_url)
     wordlist = parse_wordlist(response.text)
@@ -44,6 +44,6 @@ if __name__ == "__main__":
     if wordlist is None:
         print("Unable to properly parse wordlist.")
         sys.exit(1)
-    
+
     for x in range(password_count):
         print(" ".join(random.sample(wordlist, word_count)))
