@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import logging
 import math
 import random
@@ -7,8 +8,6 @@ import requests
 import sys
 
 wordlist_url = "https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt"
-password_count = 50
-word_count = 6
 
 def parse_wordlist(text):
     text = text.strip() # strip excess whitespace
@@ -38,6 +37,11 @@ def parse_wordlist(text):
     return words
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-w", "--words", type=int, help="Number of words per password", default=6)
+    parser.add_argument("-p", "--passwords", type=int, help="Number of passwords printed", default=50)
+    args = parser.parse_args()
+
     response = requests.get(wordlist_url)
     wordlist = parse_wordlist(response.text)
 
@@ -45,5 +49,5 @@ if __name__ == "__main__":
         print("Unable to properly parse wordlist.")
         sys.exit(1)
 
-    for x in range(password_count):
-        print(" ".join(random.sample(wordlist, word_count)))
+    for x in range(args.passwords):
+        print(" ".join(random.sample(wordlist, args.words)))
