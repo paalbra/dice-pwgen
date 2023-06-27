@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     logging.basicConfig(level=log_level)
 
-    response = requests.get(WORDLIST_URL)
+    response = requests.get(WORDLIST_URL, timeout=10)
     wordlist = parse_wordlist(response.text)
 
     if wordlist is None:
