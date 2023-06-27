@@ -50,7 +50,12 @@ if __name__ == "__main__":
 
     logging.basicConfig(level=log_level)
 
-    response = requests.get(WORDLIST_URL, timeout=10)
+    try:
+        response = requests.get(WORDLIST_URL, timeout=10)
+        response.raise_for_status()
+    except Exception as e:
+        logging.error("Unable to get wordlist (%s): %s", WORDLIST_URL, str(e))
+        sys.exit(1)
 
     try:
         wordlist = parse_wordlist(response.text)
