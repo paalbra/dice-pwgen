@@ -15,11 +15,11 @@ def parse_wordlist(text):
     lines = text.splitlines()
     words = [line.split()[-1] for line in lines]  # expect the last characters on every line to be the word
 
+    logging.debug("Number of words: %d", len(words))
+
     # Check for non-unique words
     if len(words) != len(set(words)):
         raise Exception("The word list contains non-unique words!")
-
-    logging.debug("Number of words: %d", len(words))
 
     # Check that the wordlist contains the correct amount of words
     dice_count = math.log(len(words), 6)
