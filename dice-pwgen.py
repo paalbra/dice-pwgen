@@ -30,7 +30,7 @@ def parse_wordlist(text):
     # Check the average word length
     avg_word_length = sum(len(word) for word in words) / len(words)
     if avg_word_length < 4:
-        raise Exception("Average word length is to small: %.2f", avg_word_length)
+        raise Exception("Average word length is to small: %.2f" % avg_word_length)
 
     # All OK. Return the words
     return words
