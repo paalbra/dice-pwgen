@@ -38,9 +38,17 @@ def parse_wordlist(text):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--verbose", help="Verbose logging", action="store_true")
     parser.add_argument("-w", "--words", type=int, help="Number of words per password", default=6)
     parser.add_argument("-p", "--passwords", type=int, help="Number of passwords printed", default=50)
     args = parser.parse_args()
+
+    if args.verbose:
+        log_level = logging.DEBUG
+    else:
+        log_level = logging.WARNING
+
+    logging.basicConfig(level=log_level)
 
     response = requests.get(wordlist_url)
     wordlist = parse_wordlist(response.text)
