@@ -3,8 +3,9 @@ import argparse
 import logging
 import math
 import random
-import requests
 import sys
+
+import requests
 
 WORDLIST_URL = "https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt"
 
