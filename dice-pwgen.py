@@ -29,7 +29,7 @@ def parse_wordlist(text):
         sys.exit(1)
 
     # Check the average word length
-    avg_word_length = sum([len(word) for word in words]) / len(words)
+    avg_word_length = sum(len(word) for word in words) / len(words)
     if avg_word_length < 4:
         print("Average word length is to small:", avg_word_length)
         sys.exit(1)
