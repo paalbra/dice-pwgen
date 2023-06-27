@@ -16,13 +16,13 @@ def parse_wordlist(text):
 
     # Check for non-unique words
     if len(words) != len(set(words)):
-        logging.debug("The word list contains non-unique words!")
+        logging.error("The word list contains non-unique words!")
         sys.exit(1)
-    logging.debug("Number of words:", len(words))
+    logging.debug("Number of words: %d", len(words))
 
     # Check that the wordlist contains the correct amount of words
     dice_count = math.log(len(words), 6)
-    logging.debug("Number of dice is:", dice_count)
+    logging.debug("Number of dice is: %d", dice_count)
     if not dice_count.is_integer():
         print("The number of dice is not an integer!")
         sys.exit(1)
