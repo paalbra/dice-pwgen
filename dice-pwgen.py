@@ -8,10 +8,11 @@ import sys
 
 wordlist_url = "https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt"
 
+
 def parse_wordlist(text):
-    text = text.strip() # strip excess whitespace
+    text = text.strip()  # strip excess whitespace
     lines = text.splitlines()
-    words = [line.split()[-1] for line in lines] # expect the last characters on every line to be the word
+    words = [line.split()[-1] for line in lines]  # expect the last characters on every line to be the word
 
     # Check for non-unique words
     if len(words) != len(set(words)):
@@ -34,6 +35,7 @@ def parse_wordlist(text):
 
     # All OK. Return the words
     return words
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
