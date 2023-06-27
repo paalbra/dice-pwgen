@@ -21,6 +21,11 @@ def parse_wordlist(text):
     if len(words) != len(set(words)):
         raise Exception("The word list contains non-unique words!")
 
+    # Check that the wordlist contains a fair amount of words
+    word_count = len(words)
+    if word_count < 1000:
+        raise Exception("There are too few words in the word list: %d" % word_count)
+
     # Check that the wordlist contains the correct amount of words
     dice_count = math.log(len(words), 6)
     logging.debug("Number of dice is: %d", dice_count)
