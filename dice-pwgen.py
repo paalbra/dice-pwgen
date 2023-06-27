@@ -6,7 +6,7 @@ import random
 import requests
 import sys
 
-wordlist_url = "https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt"
+WORDLIST_URL = "https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt"
 
 
 def parse_wordlist(text):
@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
     logging.basicConfig(level=log_level)
 
-    response = requests.get(wordlist_url)
+    response = requests.get(WORDLIST_URL)
     wordlist = parse_wordlist(response.text)
 
     if wordlist is None:
