@@ -41,6 +41,7 @@ if __name__ == "__main__":
     parser.add_argument("-v", "--verbose", help="Verbose logging", action="store_true")
     parser.add_argument("-w", "--words", type=int, help="Number of words per password", default=6)
     parser.add_argument("-p", "--passwords", type=int, help="Number of passwords printed", default=50)
+    parser.add_argument("-s", "--separator", help="Word separator", default=" ")
     args = parser.parse_args()
 
     if args.verbose:
@@ -64,4 +65,4 @@ if __name__ == "__main__":
         sys.exit(1)
 
     for x in range(args.passwords):
-        print(" ".join(random.sample(wordlist, args.words)))
+        print(args.separator.join(random.sample(wordlist, args.words)))
