@@ -3,7 +3,6 @@ import argparse
 import logging
 import math
 import random
-import re
 import requests
 import sys
 
