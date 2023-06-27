@@ -17,22 +17,20 @@ def parse_wordlist(text):
 
     # Check for non-unique words
     if len(words) != len(set(words)):
-        logging.error("The word list contains non-unique words!")
-        sys.exit(1)
+        raise Exception("The word list contains non-unique words!")
+
     logging.debug("Number of words: %d", len(words))
 
     # Check that the wordlist contains the correct amount of words
     dice_count = math.log(len(words), 6)
     logging.debug("Number of dice is: %d", dice_count)
-    if not dice_count.is_integer():
-        print("The number of dice is not an integer!")
-        sys.exit(1)
+    if not (dice_count.is_integer() and dice_count > 0):
+        raise Exception("The number of dice is not an integer: %.2f" % dice_count)
 
     # Check the average word length
     avg_word_length = sum(len(word) for word in words) / len(words)
     if avg_word_length < 4:
-        print("Average word length is to small:", avg_word_length)
-        sys.exit(1)
+        raise Exception("Average word length is to small: %.2f", avg_word_length)
 
     # All OK. Return the words
     return words
@@ -53,10 +51,11 @@ if __name__ == "__main__":
     logging.basicConfig(level=log_level)
 
     response = requests.get(WORDLIST_URL, timeout=10)
-    wordlist = parse_wordlist(response.text)
 
-    if wordlist is None:
-        print("Unable to properly parse wordlist.")
+    try:
+        wordlist = parse_wordlist(response.text)
+    except Exception as e:
+        logging.error(str(e))
         sys.exit(1)
 
     for x in range(args.passwords):
